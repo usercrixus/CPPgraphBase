@@ -8,12 +8,12 @@ Node &Graph::createNode()
 
 void Graph::removeNode(Node &node)
 {
-	for (Node *n : this->nodes)
-		n->unlink(node);
 	typename std::vector<Node *>::iterator it =
 		std::find(this->nodes.begin(), this->nodes.end(), &node);
 	if (it == this->nodes.end())
 		throw std::runtime_error("Trying to delete a non referenced node");
+	for (Node *n : this->nodes)
+		n->unlink(node);
 	delete *it;
 	this->nodes.erase(it);
 }

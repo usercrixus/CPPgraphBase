@@ -7,14 +7,14 @@ void Node::linkHelper(Node &node, Link &link)
 
 void Node::link(Node &node, Link &link)
 {
-	this->links.emplace_back(&node, &link);
+	this->linkHelper(node, link);
 	if (!this->oriented)
 		node.linkHelper(*this, link);
 }
 
 void Node::link(Node &node, Link &link, bool oriented)
 {
-	this->links.emplace_back(&node, &link);
+	this->linkHelper(node, link);
 	if (!this->oriented && !oriented)
 		node.linkHelper(*this, link);
 	else if (this->oriented && !oriented)

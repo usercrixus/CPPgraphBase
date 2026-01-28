@@ -7,10 +7,10 @@ class Link
 private:
 	/* data */
 public:
-	static unsigned int nextId;
-	unsigned int id;
+	unsigned long id;
 	std::string name;
 	Link();
 	Link(const std::string &name);
+	Link(const std::string &name, unsigned long id);
 	virtual ~Link();
 };

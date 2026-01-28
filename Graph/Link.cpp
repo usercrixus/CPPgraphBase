@@ -1,14 +1,15 @@
 #include "Link.hpp"
 
-unsigned int Link::nextId = 0;
-
-Link::Link() : id(nextId++), name("")
+Link::Link() : id(0), name("")
 {
 }
 
-Link::Link(const std::string &name) : name(name)
+Link::Link(const std::string &name) : id(0), name(name)
 {
-	this->id = Link::nextId++;
+}
+
+Link::Link(const std::string &name, unsigned long id) : id(id), name(name)
+{
 }
 
 Link::~Link()
