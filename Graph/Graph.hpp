@@ -13,7 +13,11 @@ private:
 	std::vector<Node*> nodes;
 public:
 	Node& createNode();
-	void removeNode(Node& node);
+	int removeNode(Node& node);
+	int removeNode(unsigned int id);
+	int removeNode(const std::string &name);
+	std::vector<Node*> getNodeByName(const std::string &name) const;
+	Node* getNodeById(unsigned int id) const;
 	void print();
 	Graph(bool oriented);
 	~Graph();

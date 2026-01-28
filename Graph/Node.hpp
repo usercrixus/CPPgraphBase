@@ -12,6 +12,8 @@ class Node
 private:
 	bool oriented;
 	unsigned int id;
+	unsigned int nextLinkId;
+	std::string name;
 	std::vector<std::pair<Node*, Link*>> links;
 	void linkHelper(Node &node, Link &link);
 public:
@@ -21,6 +23,9 @@ public:
 	void unlink(std::pair<Node*, Link*> &node);
 	void unlink(unsigned int id);
 	void unlink(const std::string &name);
+	unsigned int getId() const;
+	const std::string &getName() const;
+	void setName(const std::string &name);
 	void print();
 	Node(bool oriented, unsigned int id);
 	~Node();

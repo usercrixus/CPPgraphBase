@@ -2,6 +2,8 @@
 
 void Node::linkHelper(Node &node, Link &link)
 {
+	link.id = (static_cast<long>(this->id) << 32) | static_cast<long>(this->nextLinkId);
+	++this->nextLinkId;
 	this->links.emplace_back(&node, &link);
 }
 
@@ -69,6 +71,21 @@ void Node::unlink(const std::string &name)
 	}
 }
 
+unsigned int Node::getId() const
+{
+	return this->id;
+}
+
+const std::string &Node::getName() const
+{
+	return this->name;
+}
+
+void Node::setName(const std::string &name)
+{
+	this->name = name;
+}
+
 void Node::print()
 {
 	std::cout << this->id << " linked with" << std::endl;
@@ -81,6 +98,7 @@ void Node::print()
 
 Node::Node(bool oriented, unsigned int id)
 {
+	this->nextLinkId = 0;
 	this->id = id;
 	this->oriented = oriented;
 }
