@@ -1,5 +1,5 @@
-test.out: Test/test.cpp
-	g++ -std=c++17 Test/test.cpp -o test.out
+test.out: Test/test.cpp Graph/Link.cpp
+	g++ -std=c++17 Test/test.cpp Graph/Link.cpp -o test.out
 
 test: test.out
 	./test.out

@@ -5,16 +5,15 @@
 #include <algorithm>
 #include <stdexcept>
 
-template<typename Link>
 class Graph
 {
 private:
 	unsigned int nextId;
 	bool oriented;
-	std::vector<Node<Link>*> nodes;
+	std::vector<Node*> nodes;
 public:
-	Node<Link>& createNode();
-	void removeNode(Node<Link>& node);
+	Node& createNode();
+	void removeNode(Node& node);
 	void print();
 	Graph(bool oriented);
 	~Graph();

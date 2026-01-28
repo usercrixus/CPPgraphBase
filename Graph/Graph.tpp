@@ -1,18 +1,16 @@
 #include "Graph.hpp"
 
-template<typename Link>
-Node<Link> &Graph<Link>::createNode()
+Node &Graph::createNode()
 {
-	this->nodes.push_back(new Node<Link>(this->oriented, nextId++));
+	this->nodes.push_back(new Node(this->oriented, nextId++));
 	return *this->nodes.back();
 }
 
-template<typename Link>
-void Graph<Link>::removeNode(Node<Link> &node)
+void Graph::removeNode(Node &node)
 {
-	for (Node<Link> *n : this->nodes)
+	for (Node *n : this->nodes)
 		n->unlink(node);
-	typename std::vector<Node<Link> *>::iterator it =
+	typename std::vector<Node *>::iterator it =
 		std::find(this->nodes.begin(), this->nodes.end(), &node);
 	if (it == this->nodes.end())
 		throw std::runtime_error("Trying to delete a non referenced node");
@@ -20,24 +18,21 @@ void Graph<Link>::removeNode(Node<Link> &node)
 	this->nodes.erase(it);
 }
 
-template<typename Link>
-void Graph<Link>::print()
+void Graph::print()
 {
-	for (Node<Link> *n : this->nodes)
+	for (Node *n : this->nodes)
 		n->print();
 }
 
-template<typename Link>
-Graph<Link>::Graph(bool oriented)
+Graph::Graph(bool oriented)
 {
 	this->nextId = 0;
 	this->oriented = oriented;
 }
 
-template<typename Link>
-Graph<Link>::~Graph()
+Graph::~Graph()
 {
-	for (Node<Link> *node : this->nodes)
+	for (Node *node : this->nodes)
 	{
 		delete node;
 	}
