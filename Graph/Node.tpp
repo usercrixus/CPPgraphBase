@@ -2,19 +2,20 @@
 
 void Node::linkHelper(Node &node, Link &link)
 {
-	link.id = (static_cast<long>(this->id) << 32) | static_cast<long>(this->nextLinkId);
+	link.id = (static_cast<unsigned long>(this->id) << 32)
+		| static_cast<unsigned long>(this->nextLinkId);
 	++this->nextLinkId;
 	this->links.emplace_back(&node, &link);
 }
 
-void Node::link(Node &node, Link &&link)
+void Node::link(Node &node, Link &link)
 {
 	this->linkHelper(node, link);
 	if (!this->oriented)
 		node.linkHelper(*this, link);
 }
 
-void Node::link(Node &node, Link &&link, bool oriented)
+void Node::link(Node &node, Link &link, bool oriented)
 {
 	this->linkHelper(node, link);
 	if (!this->oriented && !oriented)
@@ -47,7 +48,7 @@ void Node::unlink(std::pair<Node*, Link*> &node)
 	}
 }
 
-void Node::unlink(unsigned int id)
+void Node::unlink(unsigned long id)
 {
 	auto it = this->links.begin();
 	while (it != this->links.end())
@@ -88,11 +89,36 @@ void Node::setName(const std::string &name)
 
 void Node::print()
 {
-	std::cout << this->id << " linked with" << std::endl;
+	std::cout << "Node " << this->id;
+	if (!this->name.empty())
+		std::cout << " (" << this->name << ")";
+	std::cout << " linked with" << std::endl;
 	for (const std::pair<Node*, Link*> &entry : this->links)
 	{
 		Node* n = entry.first;
-		std::cout << "	" << n->id << std::endl;
+		Link* l = entry.second;
+		std::cout << "	";
+		if (n)
+		{
+			std::cout << "Node " << n->id;
+			if (!n->name.empty())
+				std::cout << " (" << n->name << ")";
+		}
+		else
+		{
+			std::cout << "Node <null>";
+		}
+		if (l)
+		{
+			std::cout << " via Link " << l->id;
+			if (!l->name.empty())
+				std::cout << " (" << l->name << ")";
+		}
+		else
+		{
+			std::cout << " via Link <null>";
+		}
+		std::cout << std::endl;
 	}
 }
 

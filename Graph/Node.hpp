@@ -17,11 +17,11 @@ private:
 	std::vector<std::pair<Node*, Link*>> links;
 	void linkHelper(Node &node, Link &link);
 public:
-	void link(Node &node, Link &&link);
-	void link(Node &node, Link &&link, bool oriented);
+	void link(Node &node, Link &link);
+	void link(Node &node, Link &link, bool oriented);
 	void unlink(Node &node);
 	void unlink(std::pair<Node*, Link*> &node);
-	void unlink(unsigned int id);
+	void unlink(unsigned long id);
 	void unlink(const std::string &name);
 	unsigned int getId() const;
 	const std::string &getName() const;
