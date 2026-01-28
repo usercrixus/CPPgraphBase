@@ -16,6 +16,7 @@ private:
 	std::string name;
 	std::vector<std::pair<Node*, Link*>> links;
 	void linkHelper(Node &node, Link &link);
+	std::vector<std::pair<Node*, Link*>>::iterator unlinkHelper(std::vector<std::pair<Node*, Link*>>::iterator it);
 public:
 	void link(Node &node, Link &link);
 	void link(Node &node, Link &link, bool oriented);

@@ -24,13 +24,32 @@ void Node::link(Node &node, Link &link, bool oriented)
 		throw std::invalid_argument("Cannot create a non oriented link in an oriented graph");
 }
 
+std::vector<std::pair<Node*, Link*>>::iterator Node::unlinkHelper(std::vector<std::pair<Node*, Link*>>::iterator it)
+{
+	Node* other = it->first;
+	Link* link = it->second;
+	std::vector<std::pair<Node*, Link*>>::iterator next = this->links.erase(it);
+	if (!this->oriented && other != nullptr)
+	{
+		auto oit = other->links.begin();
+		while (oit != other->links.end())
+		{
+			if (oit->first == this && oit->second == link)
+				oit = other->links.erase(oit);
+			else
+				++oit;
+		}
+	}
+	return next;
+}
+
 void Node::unlink(Node &node)
 {
 	auto it = this->links.begin();
 	while (it != this->links.end())
 	{
 		if (it->first == &node)
-			it = this->links.erase(it);
+			it = this->unlinkHelper(it);
 		else
 			++it;
 	}
@@ -42,7 +61,7 @@ void Node::unlink(std::pair<Node*, Link*> &node)
 	while (it != this->links.end())
 	{
 		if (it->first == node.first)
-			it = this->links.erase(it);
+			it = this->unlinkHelper(it);
 		else
 			++it;
 	}
@@ -54,7 +73,7 @@ void Node::unlink(unsigned long id)
 	while (it != this->links.end())
 	{
 		if (it->second != nullptr && it->second->id == id)
-			it = this->links.erase(it);
+			it = this->unlinkHelper(it);
 		else
 			++it;
 	}
@@ -66,7 +85,7 @@ void Node::unlink(const std::string &name)
 	while (it != this->links.end())
 	{
 		if (it->second != nullptr && it->second->name == name)
-			it = this->links.erase(it);
+			it = this->unlinkHelper(it);
 		else
 			++it;
 	}
