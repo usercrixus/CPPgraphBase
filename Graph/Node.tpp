@@ -1,6 +1,6 @@
 #include "Node.hpp"
 
-void Node::linkHelper(Node &node, Link &link)
+void Node::linkHelperGenerateId(Node &node, Link &link)
 {
 	link.id = (static_cast<unsigned long>(this->id) << 32)
 		| static_cast<unsigned long>(this->nextLinkId);
@@ -8,20 +8,16 @@ void Node::linkHelper(Node &node, Link &link)
 	this->links.emplace_back(&node, &link);
 }
 
-void Node::link(Node &node, Link &link)
+void Node::linkHelper(Node &node, Link &link)
 {
-	this->linkHelper(node, link);
-	if (!this->oriented)
-		node.linkHelper(*this, link);
+	this->links.emplace_back(&node, &link);
 }
 
-void Node::link(Node &node, Link &link, bool oriented)
+void Node::link(Node &node, Link &link)
 {
-	this->linkHelper(node, link);
-	if (!this->oriented && !oriented)
+	this->linkHelperGenerateId(node, link);
+	if (!this->oriented)
 		node.linkHelper(*this, link);
-	else if (this->oriented && !oriented)
-		throw std::invalid_argument("Cannot create a non oriented link in an oriented graph");
 }
 
 std::vector<std::pair<Node*, Link*>>::iterator Node::unlinkHelper(std::vector<std::pair<Node*, Link*>>::iterator it)
