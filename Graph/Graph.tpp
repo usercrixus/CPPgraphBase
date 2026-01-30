@@ -1,8 +1,15 @@
 #include "Graph.hpp"
 
-Node &Graph::createNode()
+Node &Graph::createNode(const std::string &name)
 {
-	this->nodes.push_back(new Node(this->oriented, nextId++));
+	this->nodes.push_back(new Node(this->oriented, nextId++, name));
+	return *this->nodes.back();
+}
+
+inline Node &Graph::createNode()
+{
+	std::string name = "";
+	this->nodes.push_back(new Node(this->oriented, nextId++, name));
 	return *this->nodes.back();
 }
 

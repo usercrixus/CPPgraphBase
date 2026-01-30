@@ -51,7 +51,7 @@ void Node::unlink(Node &node)
 	}
 }
 
-void Node::unlink(std::pair<Node*, Link*> &node)
+void Node::unlink(const std::pair<Node*, Link*> &node)
 {
 	auto it = this->links.begin();
 	while (it != this->links.end())
@@ -97,6 +97,11 @@ const std::string &Node::getName() const
 	return this->name;
 }
 
+inline const std::vector<std::pair<Node *, Link *>> &Node::getLinks() const
+{
+	return (this->links);
+}
+
 void Node::setName(const std::string &name)
 {
 	this->name = name;
@@ -137,11 +142,12 @@ void Node::print()
 	}
 }
 
-Node::Node(bool oriented, unsigned int id)
+Node::Node(bool oriented, unsigned int id, const std::string &name)
 {
 	this->nextLinkId = 0;
 	this->id = id;
 	this->oriented = oriented;
+	this->name = name;
 }
 
 Node::~Node()

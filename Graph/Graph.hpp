@@ -12,6 +12,7 @@ private:
 	bool oriented;
 	std::vector<Node*> nodes;
 public:
+	Node& createNode(const std::string &name);
 	Node& createNode();
 	int removeNode(Node& node);
 	int removeNode(unsigned int id);

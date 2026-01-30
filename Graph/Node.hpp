@@ -22,14 +22,15 @@ private:
 public:
 	void link(Node &node, Link &link);
 	void unlink(Node &node);
-	void unlink(std::pair<Node*, Link*> &node);
+	void unlink(const std::pair<Node*, Link*> &node);
 	void unlink(unsigned long id);
 	void unlink(const std::string &name);
 	unsigned int getId() const;
 	const std::string &getName() const;
+	const std::vector<std::pair<Node*, Link*>> &getLinks() const;
 	void setName(const std::string &name);
 	void print();
-	Node(bool oriented, unsigned int id);
+	Node(bool oriented, unsigned int id, const std::string &name);
 	~Node();
 };
 
