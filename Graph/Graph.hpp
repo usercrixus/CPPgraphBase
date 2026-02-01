@@ -7,7 +7,7 @@
 
 class Graph
 {
-private:
+protected:
 	unsigned int nextId;
 	bool oriented;
 	std::vector<Node*> nodes;

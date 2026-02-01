@@ -9,7 +9,7 @@
 
 class Node
 {
-private:
+protected:
 	bool oriented;
 	unsigned int id;
 	unsigned int nextLinkId;
