@@ -11,7 +11,7 @@ static Node &byName(Graph &g, const std::string &name)
 	return *matches[0];
 }
 
-int main(int argc, char const *argv[])
+int main()
 {
 	Graph g(true);
 	g.createNode("0");

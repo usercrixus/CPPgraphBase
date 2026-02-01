@@ -23,5 +23,3 @@ public:
 	Graph(bool oriented);
 	~Graph();
 };
-
-#include "Graph.tpp"

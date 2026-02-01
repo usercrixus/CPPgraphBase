@@ -33,5 +33,3 @@ public:
 	Node(bool oriented, unsigned int id, const std::string &name);
 	~Node();
 };
-
-#include "Node.tpp"

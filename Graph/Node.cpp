@@ -97,7 +97,7 @@ const std::string &Node::getName() const
 	return this->name;
 }
 
-inline const std::vector<std::pair<Node *, Link *>> &Node::getLinks() const
+const std::vector<std::pair<Node *, Link *>> &Node::getLinks() const
 {
 	return (this->links);
 }
